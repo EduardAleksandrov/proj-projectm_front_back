@@ -9,5 +9,9 @@ export const serverRoutes: ServerRoute[] = [
     path: 'about',
     renderMode: RenderMode.Server
   },
+  {
+    path: 'counter',
+    renderMode: RenderMode.Client
+  },
 
 ];
