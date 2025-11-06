@@ -7,6 +7,7 @@ import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { provideRouterStore } from '@ngrx/router-store';
 import { counterReducer } from './store/counter.reducer'; // Import your reducer
+import { CounterEffects } from './store/counter.effects'; // Adjust the path accordingly
 
 
 export const appConfig: ApplicationConfig = {
@@ -18,7 +19,7 @@ export const appConfig: ApplicationConfig = {
       counter: counterReducer, // Register your reducer with a key (e.g., 'counter')
       // Add more reducers here if you have multiple feature stores
     }),
-    provideEffects(),
+    provideEffects([CounterEffects]),
     provideRouterStore()
 ]
 };
