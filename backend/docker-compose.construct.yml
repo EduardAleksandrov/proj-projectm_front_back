@@ -1,0 +1,11 @@
+version: '3.7'
+
+services:
+  webconstructm:
+    build:
+      context: .
+      dockerfile: docker/Construct.Dockerfile
+    ports:
+      - "5000:5071"  # Map host port 5000 to container port 80
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development

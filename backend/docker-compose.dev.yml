@@ -1,0 +1,20 @@
+version: '3.7'  # Specify the Docker Compose version
+
+services:
+  projectm_baseservice_service_dev:
+    container_name: baseservice_service_dev
+    build:
+      context: .  # Current directory
+      dockerfile: docker/BaseServiceDev.Dockerfile  # The Dockerfile to use
+    ports:
+      - "8080:80"  # Map port 5000 on host to port 80 on container
+    volumes:
+      - ./BaseService:/app  # Bind mount the current directory to the /app directory in the container
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"  # Set the environment variable
+      ASPNETCORE_URLS: "http://baseservice_service:80"
+    networks:
+      - default
+
+networks:
+  default:
