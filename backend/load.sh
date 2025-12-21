@@ -35,6 +35,7 @@ function devdown() {
 }
 
 function cont() {
+    hostname -I
     docker exec -it baseservice_service /bin/sh
 }
 
