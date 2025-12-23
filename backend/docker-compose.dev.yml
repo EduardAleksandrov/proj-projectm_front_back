@@ -1,5 +1,12 @@
 version: '3.7'  # Specify the Docker Compose version
 
+networks:
+  projectm:
+    driver: bridge
+
+volumes:
+  baseservice_postgresql-vl:
+
 services:
   projectm_baseservice_service_dev:
     container_name: baseservice_service_dev
@@ -14,7 +21,26 @@ services:
       ASPNETCORE_ENVIRONMENT: "Development"  # Set the environment variable
       ASPNETCORE_URLS: "http://baseservice_service:80"
     networks:
-      - default
+      - projectm
 
-networks:
-  default:
+  projectm_baseservice_postgresql_dev:
+    image: postgres:18
+    restart: unless-stopped
+    container_name: baseservice_postgresql_dev #host for pgadmin
+    ports:
+      - 5432:5432
+    volumes:
+      - baseservice_postgresql-vl:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: "db-init-baseservice"
+      POSTGRES_USER: "user"
+      POSTGRES_PASSWORD: "password"
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    networks:
+      - projectm
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d db-init"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
