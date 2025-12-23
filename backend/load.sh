@@ -8,7 +8,7 @@ function construct-up() {
     docker-compose -f docker-compose.construct.yml up --build
 }
 function construct-copy() {
-    docker cp backend_webconstructm_1:/app/BaseService .
+    docker cp backend_webconstructm_1:/app/OcelotApiGateway .
 }
 function construct-down() {
     docker-compose -f docker-compose.construct.yml down

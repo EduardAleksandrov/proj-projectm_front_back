@@ -8,8 +8,8 @@ volumes:
   baseservice_postgresql-vl:
 
 services:
-  projectm_baseservice_service_dev:
-    container_name: baseservice_service_dev
+  projectm_baseservice_service:
+    container_name: baseservice_service
     build:
       context: .  # Current directory
       dockerfile: docker/BaseServiceDev.Dockerfile  # The Dockerfile to use
@@ -23,10 +23,10 @@ services:
     networks:
       - projectm
 
-  projectm_baseservice_postgresql_dev:
+  projectm_baseservice_postgresql:
     image: postgres:18
     restart: unless-stopped
-    container_name: baseservice_postgresql_dev #host for pgadmin
+    container_name: baseservice_postgresql #host for pgadmin
     ports:
       - 5432:5432
     volumes:
@@ -44,3 +44,16 @@ services:
       timeout: 5s
       retries: 5
       start_period: 10s
+
+  projectm_apigateway_service:
+    container_name: apigateway_service
+    build:
+      context: .  # Current directory
+      dockerfile: docker/ApiGateway.Dockerfile  # The Dockerfile to use
+    ports:
+      - "5000:5000"  # Map port 5000 on host to port 80 on container
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Production"  # Set the environment variable
+      ASPNETCORE_URLS: "http://apigateway_service:5000"
+    networks:
+      - projectm
