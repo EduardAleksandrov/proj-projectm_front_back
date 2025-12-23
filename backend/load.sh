@@ -16,22 +16,18 @@ function construct-down() {
 
 # Production
 function up() {
-    docker-compose -f docker-compose.yml up --build
+    docker-compose --env-file prod.env -f docker-compose.yml up --build
 }
 function down() {
-    docker-compose -f docker-compose.yml down
-}
-function downup() {
-    docker-compose -f docker-compose.yml down
-    docker-compose -f docker-compose.yml up --build
+    docker-compose --env-file prod.env -f docker-compose.yml down
 }
 
 # Development
 function devup() {
-    docker-compose -f docker-compose.dev.yml up --build
+    docker-compose --env-file dev.env -f docker-compose.yml up --build
 }
 function devdown() {
-    docker-compose -f docker-compose.dev.yml down
+    docker-compose --env-file dev.env -f docker-compose.yml down
 }
 
 function cont() {
@@ -54,9 +50,6 @@ case "$1" in
         ;;
     down)
         down
-        ;;
-    downup)
-        downup
         ;;
     devup)
         devup

@@ -12,11 +12,11 @@ services:
     container_name: baseservice_service
     build:
       context: .  # Current directory
-      dockerfile: docker/BaseService.Dockerfile  # The Dockerfile to use
+      dockerfile: ${DOCFILEBASESERVICE}  # The Dockerfile to use
     ports:
       - "8080:80"  # Map port 5000 on host to port 80 on container
     environment:
-      ASPNETCORE_ENVIRONMENT: "Production"  # Set the environment variable
+      ASPNETCORE_ENVIRONMENT: ${ASPNETENV}  # Set the environment variable
       ASPNETCORE_URLS: "http://baseservice_service:80"
     networks:
       - projectm
