@@ -34,6 +34,13 @@ function cont() {
     hostname -I
     docker exec -it baseservice_service /bin/sh
 }
+function postgre-init-dump() {
+    docker exec -it baseservice_postgresql bash
+    pg_dump -U user -d db-init -f /var/lib/postgresql/data/db-init_dump.sql
+    exit
+    docker cp baseservice_postgresql:/var/lib/postgresql/data/db-init_dump.sql ./db-init_dump.sql
+}
+
 
 case "$1" in
     construct-up)

@@ -29,15 +29,16 @@ services:
       - 5432:5432
     volumes:
       - baseservice_postgresql-vl:/var/lib/postgresql/data
+      - ./BaseServiceDb/db-init_dump.sql:/docker-entrypoint-initdb.d/init_db.sql
     environment:
-      POSTGRES_DB: "db-init-baseservice"
+      POSTGRES_DB: "base-db"
       POSTGRES_USER: "user"
       POSTGRES_PASSWORD: "password"
       PGDATA: "/var/lib/postgresql/data/pgdata"
     networks:
       - projectm
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U user -d db-init"]
+      test: ["CMD-SHELL", "pg_isready -U user -d base-db"]
       interval: 10s
       timeout: 5s
       retries: 5
