@@ -11,6 +11,18 @@
       ],
       "UpstreamPathTemplate": "/api/base/{everything}",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "baseservice_service",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/static/base/{everything}",
+      "UpstreamHttpMethod": [ "GET" ]
     }
   ],
   "GlobalConfiguration": {

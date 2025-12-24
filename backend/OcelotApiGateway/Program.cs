@@ -10,6 +10,9 @@ builder.Configuration.AddJsonFile("ocelot.json");
 
 var app = builder.Build();
 
+// Включаем обслуживание статических файлов
+app.UseStaticFiles();
+
 // Configure the Ocelot middleware
 app.UseRouting();
 

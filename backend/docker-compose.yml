@@ -11,13 +11,15 @@ services:
   projectm_baseservice_service:
     container_name: baseservice_service
     build:
-      context: .  # Current directory
+      context: .  # Current directory where docker-compose.yml file
       dockerfile: ${DOCFILEBASESERVICE}  # The Dockerfile to use
     ports:
       - "8080:80"  # Map port 5000 on host to port 80 on container
     environment:
       ASPNETCORE_ENVIRONMENT: ${ASPNETENV}  # Set the environment variable
       ASPNETCORE_URLS: "http://baseservice_service:80"
+    volumes:
+      - ../files:/app/wwwroot  # Монтируем статическую папку
     networks:
       - projectm
 
