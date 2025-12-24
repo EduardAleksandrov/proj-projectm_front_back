@@ -13,6 +13,7 @@ services:
     build:
       context: .  # Current directory where docker-compose.yml file
       dockerfile: ${DOCFILEBASESERVICE}  # The Dockerfile to use
+    restart: unless-stopped
     ports:
       - "8080:80"  # Map port 5000 on host to port 80 on container
     environment:
@@ -22,11 +23,13 @@ services:
       - ../files:/app/wwwroot  # Монтируем статическую папку
     networks:
       - projectm
+    depends_on:
+      - projectm_baseservice_postgresql
 
   projectm_baseservice_postgresql:
     image: postgres:18
-    restart: unless-stopped
     container_name: baseservice_postgresql #host for pgadmin
+    restart: unless-stopped
     ports:
       - 5432:5432
     volumes:
@@ -51,6 +54,7 @@ services:
     build:
       context: .  # Current directory
       dockerfile: docker/ApiGateway.Dockerfile  # The Dockerfile to use
+    restart: unless-stopped
     ports:
       - "5000:5000"  # Map port 5000 on host to port 80 on container
     environment:
