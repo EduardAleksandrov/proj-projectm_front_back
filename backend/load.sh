@@ -16,18 +16,18 @@ function construct-down() {
 
 # Production
 function up() {
-    docker-compose --env-file eprod.env -f docker-compose.yml up --build
+    docker-compose --env-file .env.prod -f docker-compose.yml up --build
 }
 function down() {
-    docker-compose --env-file eprod.env -f docker-compose.yml down
+    docker-compose --env-file .env.prod -f docker-compose.yml down
 }
 
 # Development
 function devup() {
-    docker-compose --env-file edev.env -f docker-compose.yml up --build
+    docker-compose --env-file .env.dev -f docker-compose.yml up --build
 }
 function devdown() {
-    docker-compose --env-file edev.env -f docker-compose.yml down
+    docker-compose --env-file .env.dev -f docker-compose.yml down
 }
 
 function cont() {
