@@ -2,7 +2,7 @@ version: '3.7'  # Specify the Docker Compose version
 
 networks:
   projectm:
-    driver: bridge
+    external: true  # Указываем, что это внешняя сеть
 
 volumes:
   baseservice_postgresql-vl:

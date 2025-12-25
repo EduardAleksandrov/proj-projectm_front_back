@@ -1,0 +1,19 @@
+version: '3.7'  # Specify the Docker Compose version
+
+networks:
+  projectm:
+    external: true  # Указываем, что сеть внешняя
+    # driver: bridge
+
+services:
+  projectm_angular-app:
+    container_name: angular-app
+    build:
+      context: .
+      dockerfile: ${DOCFILE}
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./src:/app/src  # mounts the current directory for live reloading during development
+    networks:
+      - projectm

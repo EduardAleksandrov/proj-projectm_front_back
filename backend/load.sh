@@ -14,6 +14,16 @@ function construct-down() {
     docker-compose -f docker-compose.construct.yml down
 }
 
+# Создание сети
+function create-network() {
+    docker network create --driver bridge projectm
+    docker network ls
+}
+function delete-network() {
+    docker network rm projectm
+    docker network ls
+}
+
 # Production
 function up() {
     docker-compose --env-file .env.prod -f docker-compose.yml up --build
@@ -51,6 +61,12 @@ case "$1" in
         ;;
     construct-copy)
         construct-copy
+        ;;
+    cnet)
+        create-network
+        ;;
+    delnet)
+        delete-network
         ;;
     up)
         up
