@@ -26,6 +26,9 @@ function delete-network() {
 
 # Production
 function up() {
+    docker-compose --env-file .env.prod -f docker-compose.yml up 
+}
+function up-b() {
     docker-compose --env-file .env.prod -f docker-compose.yml up --build
 }
 function down() {
@@ -34,14 +37,21 @@ function down() {
 
 # Development
 function devup() {
+    docker-compose --env-file .env.dev -f docker-compose.yml up
+}
+function devup-b() {
     docker-compose --env-file .env.dev -f docker-compose.yml up --build
 }
 function devdown() {
     docker-compose --env-file .env.dev -f docker-compose.yml down
 }
 
+# Для работы разное
 function cont() {
     hostname -I
+    # ip хоста
+    ip addr show
+    # docker контейнер
     docker exec -it baseservice_service /bin/sh
 }
 function postgre-init-dump() {
@@ -50,7 +60,9 @@ function postgre-init-dump() {
     exit
     docker cp baseservice_postgresql:/var/lib/postgresql/data/db-init_dump.sql ./db-init_dump.sql
 }
-
+function clear-docker() {
+    docker system prune
+}
 
 case "$1" in
     construct-up)
@@ -71,11 +83,17 @@ case "$1" in
     up)
         up
         ;;
+    up-b)
+        up-b
+        ;;
     down)
         down
         ;;
     devup)
         devup
+        ;;
+    devup-b)
+        devup-b
         ;;
     devdown)
         devdown

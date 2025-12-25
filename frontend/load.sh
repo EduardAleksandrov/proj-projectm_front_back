@@ -5,6 +5,9 @@
 
 # Production
 function up() {
+    docker-compose --env-file .env.prod -f docker-compose.yml up
+}
+function up-b() {
     docker-compose --env-file .env.prod -f docker-compose.yml up --build
 }
 function down() {
@@ -13,6 +16,9 @@ function down() {
 
 # Development
 function devup() {
+    docker-compose --env-file .env.dev -f docker-compose.yml up
+}
+function devup-b() {
     docker-compose --env-file .env.dev -f docker-compose.yml up --build
 }
 function devdown() {
@@ -24,11 +30,17 @@ case "$1" in
     up)
         up
         ;;
+    up-b)
+        up-b
+        ;;
     down)
         down
         ;;
     devup)
         devup
+        ;;
+    devup-b)
+        devup-b
         ;;
     devdown)
         devdown
