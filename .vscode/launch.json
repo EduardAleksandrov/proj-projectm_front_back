@@ -1,0 +1,30 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Containers .NET Attach (Preview)",
+            "type": "docker",
+            "request": "attach",
+            "processId": "${command:pickRemoteProcess}",
+            "containerName": "baseservice_service",
+            "netCore": {
+                "debuggerPath": "/remote_debugger/vsdbg"
+            },
+            "sourceFileMap": {
+                "/app": "${workspaceFolder}/backend/BaseService"
+            }
+        },
+    ],
+    "compounds": [
+        {
+            "name": "All Services (Docker)",
+            "configurations": [
+                "Containers .NET Attach (Preview)"
+            ],
+            "stopAll": true
+        }
+    ]
+}

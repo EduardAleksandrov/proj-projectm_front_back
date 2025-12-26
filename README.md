@@ -28,4 +28,7 @@
 - В папке backend запускаем ``` ./load.sh devdown``` для остановки бекэнда в разработке
 - В папке backend запускаем ``` ./load.sh devup-b``` для пересборки build контейнеров в разработке
 
-
+4) Отладка
+- В контейнер нужно установить debugger ``` BaseServiceDev.Dockerfile ```
+- .vscode/launch.json нужен для отладки .net
+- Для отладчика выбираем Процесс с ``` app/bin/Debug/net10.0/.../ВашеПриложение.dll ```
