@@ -26,13 +26,13 @@ function delete-network() {
 
 # Production
 function up() {
-    docker-compose --env-file .env.prod -f docker-compose.yml up 
+    docker-compose --env-file .env.prod -f docker-compose.prod.yml up 
 }
 function up-b() {
-    docker-compose --env-file .env.prod -f docker-compose.yml up --build
+    docker-compose --env-file .env.prod -f docker-compose.prod.yml up --build
 }
 function down() {
-    docker-compose --env-file .env.prod -f docker-compose.yml down
+    docker-compose --env-file .env.prod -f docker-compose.prod.yml down
 }
 
 # Development
