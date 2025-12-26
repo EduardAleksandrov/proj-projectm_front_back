@@ -46,6 +46,7 @@ services:
       ASPNETCORE_URLS: "http://baseservice_service:80"
     volumes:
       - ../files:/app/wwwroot  # Монтируем статическую папку
+      - ./BaseService/Controllers:/app/Controllers
     networks:
       - projectm
     depends_on:

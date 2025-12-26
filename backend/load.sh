@@ -83,6 +83,8 @@ function clear-docker() {
     docker container prune 
     docker volume prune
     docker network prune
+
+    sudo rm -rf folder # принудительное удаление файлов из папки files
 }
 # Для сервера
 function clear-docker() {
