@@ -1,5 +1,11 @@
 # Проект "Project M"
 
+## Что сделать
+
+- flag -d (detach) для production добавить
+- на продакшене проверить UID (User Identifier) и GID (Group Identifier) для docker-compose
+- миграции на сервере
+
 ## Настройка
 
 1) Установка сети docker:
@@ -28,7 +34,7 @@
 - В папке backend запускаем ``` ./load.sh devdown``` для остановки бекэнда в разработке
 - В папке backend запускаем ``` ./load.sh devup-b``` для пересборки build контейнеров в разработке
 
-4) Отладка
+4) Отладка backend vscode
 - В контейнер нужно установить debugger ``` BaseServiceDev.Dockerfile ```
 - .vscode/launch.json нужен для отладки .net
 - Для отладчика выбираем Процесс с ``` app/bin/Debug/net10.0/.../ВашеПриложение.dll ```

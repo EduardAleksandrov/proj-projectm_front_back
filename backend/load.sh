@@ -63,15 +63,15 @@ function postgre-init-dump() {
     exit
     docker cp baseservice_postgresql:/var/lib/postgresql/data/db-init_dump.sql ./db-init_dump.sql
 }
-    # Рабочая функция для сервера
-function postgre-init-dump-server() {
+# Рабочая функция для сервера
+function postgre-base-db-dump-server() {
     # Создаем дамп с датой в имени файла
     docker exec baseservice_postgresql bash -c "\
-        pg_dump -U user -d db-init -f /var/lib/postgresql/data/db-init_dump_\$(date +%Y%m%d).sql
+        pg_dump -U user -d base-db -f /var/lib/postgresql/data/base-db_dump_\$(date +%Y%m%d).sql
     "
     
     # Копируем файл дампа на хост
-    docker cp baseservice_postgresql:/var/lib/postgresql/data/db-init_dump_$(date +%Y%m%d).sql ./db-init_dump_$(date +%Y%m%d).sql
+    docker cp baseservice_postgresql:/var/lib/postgresql/data/base-db_dump_$(date +%Y%m%d).sql ../db-dumps/base-db_dump_$(date +%Y%m%d).sql
 }
 
 # Команды очистки
@@ -89,10 +89,10 @@ function clear-docker() {
 # Для сервера
 function clear-docker() {
     create-network # Первое, что сделать на сервере. В конвеер развертывания не входит.
-    mkdir files
+    mkdir files db-dumps
 
-    postgre-init-dump-server
     cd backend
+    postgre-base-db-dump-server
     down
     cd ../frontend
     down
@@ -143,5 +143,8 @@ case "$1" in
         ;;
     devdown)
         devdown
+        ;;
+    db-dump)
+        postgre-base-db-dump-server
         ;;
 esac
