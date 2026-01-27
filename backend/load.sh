@@ -100,8 +100,8 @@ function clear-docker() {
     cd ../frontend
     down
 
-    docker container prune
-    docker image prune
+    docker container prune # This will remove all stopped containers.
+    docker image prune # Запущенные образы команда не удаляет. 
     rm -rf backend
     rm -rf frontend
 

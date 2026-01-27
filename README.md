@@ -40,6 +40,6 @@
 - Для отладчика выбираем Процесс с ``` app/bin/Debug/net10.0/.../ВашеПриложение.dll ```
 
 5) Миграции
-- При разработке миграции создаются в контейнере и выполняются тамже, а дальше копируюся из контейнера в папку Migrations.
+- При разработке миграции создаются в контейнере и выполняются там же, а дальше копируюся из контейнера в папку Migrations.
 - При production миграции берутся из папки Migrations и при первом запуске запускаются.
 - При production используется метод - Migration Bundles (Modern Standard). A Migration Bundle is a self-contained executable that includes everything needed to run migrations without requiring the .NET SDK in your production environment. 
