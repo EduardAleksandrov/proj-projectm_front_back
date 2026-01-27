@@ -6,6 +6,11 @@ namespace BaseService.Controllers;
 [Route("api/base/[controller]")]
 public class WeatherForecastController : ControllerBase
 {
+    private readonly IConfiguration _configuration;
+    public WeatherForecastController(IConfiguration configuration)
+    {
+        _configuration = configuration;
+    }
     private static readonly string[] Summaries =
     [
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
@@ -14,11 +19,13 @@ public class WeatherForecastController : ControllerBase
     [HttpGet(Name = "GetWeatherForecast")]
     public IEnumerable<WeatherForecast> Get()
     {
+        var apiKey = _configuration["JWT:KEY"];
         return Enumerable.Range(1, 5).Select(index => new WeatherForecast
         {
             Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
             TemperatureC = Random.Shared.Next(-20, 55),
-            Summary = Summaries[Random.Shared.Next(Summaries.Length)]
+            Summary = Summaries[Random.Shared.Next(Summaries.Length)],
+            Key = apiKey
         })
         .ToArray();
     }

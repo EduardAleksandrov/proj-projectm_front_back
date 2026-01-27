@@ -64,6 +64,8 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: ${ASPNETENV}  # Set the environment variable
       ASPNETCORE_URLS: "http://baseservice_service:80"
+    env_file:
+      - .env  # Все переменные из файла станут доступны в этом контейнере
     volumes:
       - ../files:/app/wwwroot  # Монтируем статическую папку
       - ./BaseService/Controllers:/app/Controllers
