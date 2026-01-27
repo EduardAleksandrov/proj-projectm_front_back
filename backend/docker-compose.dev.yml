@@ -1,8 +1,5 @@
 version: '3.7'  # Specify the Docker Compose version
 
-x-app-args: &app-args
-  - USER=${USER}
-
 networks:
   projectm:
     external: true  # Указываем, что это внешняя сеть
@@ -48,8 +45,8 @@ services:
       ASPNETCORE_ENVIRONMENT: ${ASPNETENV}  # Set the environment variable
       ASPNETCORE_URLS: "http://baseservice_service:80"
     volumes:
-      - ../files:/app/wwwroot  #! Монтируем статическую папку
-    user: "1000:1000" #! Запускаем с такимже пользователем UID (User Identifier) и GID (Group Identifier) как и хост для папки files нужно
+      - ../files:/app/wwwroot  # Монтируем статическую папку
+      - ./BaseService/Controllers:/app/Controllers
     networks:
       - projectm
     depends_on:

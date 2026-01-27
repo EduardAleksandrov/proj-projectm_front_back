@@ -26,24 +26,24 @@ function delete-network() {
 
 # Production
 function up() {
-    docker-compose --env-file .env.prod -f docker-compose.prod.yml up 
+    docker-compose --env-file .env.prod -f docker-compose.yml up --detach
 }
 function up-b() {
-    docker-compose --env-file .env.prod -f docker-compose.prod.yml up --build
+    docker-compose --env-file .env.prod -f docker-compose.yml up --build --detach
 }
 function down() {
-    docker-compose --env-file .env.prod -f docker-compose.prod.yml down
+    docker-compose --env-file .env.prod -f docker-compose.yml down 
 }
 
 # Development
 function devup() {
-    docker-compose --env-file .env.dev -f docker-compose.yml up
+    docker-compose --env-file .env.dev -f docker-compose.dev.yml up
 }
 function devup-b() {
-    docker-compose --env-file .env.dev -f docker-compose.yml up --build
+    docker-compose --env-file .env.dev -f docker-compose.dev.yml up --build
 }
 function devdown() {
-    docker-compose --env-file .env.dev -f docker-compose.yml down
+    docker-compose --env-file .env.dev -f docker-compose.dev.yml down
 }
 
 # Для работы разное
@@ -72,6 +72,9 @@ function postgre-base-db-dump-server() {
     
     # Копируем файл дампа на хост
     docker cp baseservice_postgresql:/var/lib/postgresql/data/base-db_dump_$(date +%Y%m%d).sql ../db-dumps/base-db_dump_$(date +%Y%m%d).sql
+}
+function docker-cp() {
+    docker cp baseservice_service:/app/Migrations ./BaseService/
 }
 
 # Команды очистки

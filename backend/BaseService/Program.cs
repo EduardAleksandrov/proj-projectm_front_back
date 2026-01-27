@@ -1,3 +1,7 @@
+using Microsoft.EntityFrameworkCore;
+using Npgsql;
+using DBase.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -8,6 +12,11 @@ builder.Services.AddOpenApi();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// Entity Framework
+string? connection = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(connection));
+// ---
 
 var app = builder.Build();
 
