@@ -9,6 +9,8 @@ import { provideRouterStore } from '@ngrx/router-store';
 import { counterReducer } from './store/counter.reducer'; // Import your reducer
 import { CounterEffects } from './store/counter.effects'; // Adjust the path accordingly
 
+import { provideHttpClient } from '@angular/common/http';
+
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -20,6 +22,7 @@ export const appConfig: ApplicationConfig = {
       // Add more reducers here if you have multiple feature stores
     }),
     provideEffects([CounterEffects]),
-    provideRouterStore()
+    provideRouterStore(),
+    provideHttpClient()
 ]
 };
