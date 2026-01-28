@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { selectCount } from '../../store/counter.selectors'; // Import the selector
 import { AsyncPipe, JsonPipe } from '@angular/common'; // Import AsyncPipe
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-counter',
@@ -36,7 +37,7 @@ export class Counter {
   }
 
   fetchData() {
-    const url = 'http://localhost/api/base/weatherforecast'; // Replace with your API URL
+    const url = `${environment.apiUrl}/api/base/weatherforecast`; // Replace with your API URL
     this.http.get(url).subscribe({
       next: (data) => {
         this.jsonData = data; // Save the response to your variable
