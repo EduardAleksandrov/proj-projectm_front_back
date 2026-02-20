@@ -1,4 +1,3 @@
-version: '3.7'  # Specify the Docker Compose version
 
 x-app-args: &app-args
   - USER=${USER}
@@ -81,7 +80,7 @@ services:
     env_file:
       - .env  # Все переменные из файла станут доступны в этом контейнере
     volumes:
-      - ../files:/app/wwwroot  # Монтируем статическую папку
+      - ../files:/app/wwwroot  # Монтируем статическую папку // Use ContentRootPath for non-web files, or WebRootPath for files in wwwroot // string filePath = Path.Combine(_env.ContentRootPath, "your-file.txt");
       - ./BaseService/Controllers:/app/Controllers
     networks:
       - projectm

@@ -5,24 +5,24 @@
 
 # Production
 function up() {
-    docker-compose --env-file .env.prod -f docker-compose.yml up --detach
+    docker compose --env-file .env.prod -f docker-compose.yml up --detach
 }
 function up-b() {
-    docker-compose --env-file .env.prod -f docker-compose.yml up --build --detach
+    docker compose --env-file .env.prod -f docker-compose.yml up --build --detach
 }
 function down() {
-    docker-compose --env-file .env.prod -f docker-compose.yml down
+    docker compose --env-file .env.prod -f docker-compose.yml down
 }
 
 # Development
 function devup() {
-    docker-compose --env-file .env.dev -f docker-compose.dev.yml up
+    docker compose --env-file .env.dev -f docker-compose.dev.yml up
 }
 function devup-b() {
-    docker-compose --env-file .env.dev -f docker-compose.dev.yml up --build
+    docker compose --env-file .env.dev -f docker-compose.dev.yml up --build
 }
 function devdown() {
-    docker-compose --env-file .env.dev -f docker-compose.dev.yml down
+    docker compose --env-file .env.dev -f docker-compose.dev.yml down
 }
 
 
